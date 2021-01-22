@@ -65,6 +65,13 @@
               <span translate>Login</span>
             </button>
           </form>
+
+          <hr />
+          <!-- change href to production url -->
+          <a class="btn btn-danger w-100" href="http://localhost:3000/auth/google">
+            <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+            <span translate>Continue with Google</span>
+          </a>
         </div>
       </div>
     </div>

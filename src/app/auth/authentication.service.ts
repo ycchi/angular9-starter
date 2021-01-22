@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -17,7 +18,7 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private credentialsService: CredentialsService) {}
+  constructor(private credentialsService: CredentialsService, private http: HttpClient) {}
 
   /**
    * Authenticates the user.
@@ -31,6 +32,15 @@ export class AuthenticationService {
       token: '123456',
     };
     this.credentialsService.setCredentials(data, context.remember);
+    return of(data);
+  }
+
+  continueWithGoogle(cookie: any): Observable<Credentials> {
+    const data = {
+      username: cookie.profile.displayName,
+      token: cookie.idToken,
+    };
+    this.credentialsService.setCredentials(data, true);
     return of(data);
   }
 
